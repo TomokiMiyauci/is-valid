@@ -24,9 +24,8 @@ const failOnTrue = <T extends AnyFn<any, boolean>, U extends unknown>(
       if (validate(...val)) {
         return msg;
       }
-
-      return;
     }
+    return;
   };
 
 export { failOnFalse, failOnTrue, isValid };
