@@ -11,13 +11,13 @@ A pure functional validator with composite function and validation utilities
 
 [![test](https://github.com/TomokiMiyauci/is-valid/actions/workflows/test.yml/badge.svg)](https://github.com/TomokiMiyauci/is-valid/actions/workflows/test.yml)
 [![GitHub release](https://img.shields.io/github/release/TomokiMiyauci/is-valid.svg)](https://github.com/TomokiMiyauci/is-valid/releases)
-[![deno land](http://img.shields.io/badge/available%20on-deno.land/x-lightgrey.svg?logo=deno&labelColor=black)](https://deno.land/x/is-valid)
-[![nest badge](https://nest.land/badge.svg)](https://nest.land/package/is-valid)
-[![deno doc](https://doc.deno.land/badge.svg)](https://doc.deno.land/https/deno.land/x/is-valid/mod.ts)
+[![deno land](http://img.shields.io/badge/available%20on-deno.land/x-lightgrey.svg?logo=deno&labelColor=black)](https://deno.land/x/is_valid)
+[![nest badge](https://nest.land/badge.svg)](https://nest.land/package/is_valid)
+[![deno doc](https://doc.deno.land/badge.svg)](https://doc.deno.land/https/deno.land/x/is_valid/mod.ts)
 [![deno version](https://img.shields.io/badge/deno-^1.6.0-lightgrey?logo=deno)](https://github.com/denoland/deno)
 ![node support version](https://img.shields.io/badge/node-%5E14.16.0-yellow)
-![bundle size](https://img.shields.io/bundlephobia/min/lauqe)
-![npm download](https://img.shields.io/npm/dw/lauqe?color=blue)
+![bundle size](https://img.shields.io/bundlephobia/min/is-valid)
+![npm download](https://img.shields.io/npm/dw/is-valid?color=blue)
 
 [![dependencies Status](https://status.david-dm.org/gh/TomokiMiyauci/is-valid.svg)](https://david-dm.org/TomokiMiyauci/is-valid)
 [![codecov](https://codecov.io/gh/TomokiMiyauci/is-valid/branch/main/graph/badge.svg?token=SPAi5Pv2wd)](https://codecov.io/gh/TomokiMiyauci/is-valid)
