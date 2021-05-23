@@ -1,7 +1,7 @@
 {
   "name": "@miyauci/is-valid",
   "description": "A pure functional validator with composite function and validation utilities",
-  "version": "0.0.0",
+  "version": "1.0.0-beta.1",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "types": "dist/index.es.d.ts",
