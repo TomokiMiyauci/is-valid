@@ -1,8 +1,14 @@
 // Copyright 2021-present the is-valid authors. All rights reserved. MIT license.
-import { failOnFalse, failOnTrue } from "./is_valid.ts";
+import {
+  failOnFalse,
+  failOnTrue,
+  isValidFalse,
+  isValidTrue,
+} from "./is_valid.ts";
 import { assertEquals } from "../dev_deps.ts";
-import { AnyFn } from "../deps.ts";
+import { AnyFn, not } from "../deps.ts";
 import { gtLength, ltLength } from "../validation/length.ts";
+import { isString } from "../validation/isString.ts";
 
 Deno.test("failOnFalse", () => {
   const table: [[AnyFn<any, boolean>, unknown][], unknown, unknown][] = [
@@ -42,6 +48,49 @@ Deno.test("failOnTrue", () => {
       failOnTrue(validations)(val),
       expected,
       `failOnTrue(${validations})(${val}) -> ${expected}`,
+    );
+  });
+});
+
+Deno.test("isValidTrue", () => {
+  const table: [AnyFn<any, boolean>[], unknown, boolean][] = [
+    [[isString], "", true],
+    [[isString], undefined, false],
+    [[isString, gtLength(4)], undefined, false],
+    [[isString, gtLength(4)], "und", false],
+    [[isString, gtLength(4)], "undefined", true],
+    [[isString, gtLength(4), ltLength(6)], "undefined", false],
+    [[isString, gtLength(4), ltLength(6)], "abcde", true],
+    [[isString, gtLength(4), ltLength(6)], "abcdef", false],
+    // internal error
+    [[gtLength(4), ltLength(6)], undefined, false],
+  ];
+
+  table.forEach(([validations, val, expected]) => {
+    assertEquals(
+      isValidTrue(...validations)(val),
+      expected,
+      `isValidTrue(${validations})(${val}) -> ${expected}`,
+    );
+  });
+});
+
+Deno.test("isValidFalse", () => {
+  const table: [AnyFn<any, boolean>[], unknown, boolean][] = [
+    [[isString], "", false],
+    [[isString], undefined, true],
+    [[isString, gtLength(4)], undefined, false],
+    [[not(isString), gtLength(4)], "und", true],
+    [[not(isString), gtLength(4)], "undefined", false],
+    // internal error
+    [[gtLength(4), ltLength(6)], undefined, false],
+  ];
+
+  table.forEach(([validations, val, expected]) => {
+    assertEquals(
+      isValidFalse(...validations)(val),
+      expected,
+      `isValidFalse(${validations})(${val}) -> ${expected}`,
     );
   });
 });
