@@ -1,3 +1,8 @@
+# [v1.0.0-beta.3](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2021-05-28)
+
+## ✨ New Features
+- [`f4e692d`](https://github.com/TomokiMiyauci/is-valid/commit/f4e692d)   Add isValidTrue and isValidFalse functions
+
 # [v1.0.0-beta.2](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2021-05-23)
 
 ## ✨ New Features
