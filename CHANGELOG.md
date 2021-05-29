@@ -1,3 +1,8 @@
+# [v1.0.0-beta.4](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2021-05-29)
+
+## 🐛 Bug Fixes
+- [`181ce7b`](https://github.com/TomokiMiyauci/is-valid/commit/181ce7b)   Add dependencies
+
 # [v1.0.0-beta.3](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2021-05-28)
 
 ## ✨ New Features
