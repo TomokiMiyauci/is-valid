@@ -1,13 +1,5 @@
 // Copyright 2021-present the is-valid authors. All rights reserved. MIT license.
-
-/**
- * String or not.
- *
- * @typeParam T - Any value
- *
- * @public
- */
-type IsString<T extends unknown> = T extends string ? true : false;
+import { typeComparisonFactory } from "./_utils.ts";
 
 /**
  * Whatever argument is type of `string` or not.
@@ -23,7 +15,6 @@ type IsString<T extends unknown> = T extends string ? true : false;
  *
  * @public
  */
-const isString = (val: unknown): val is string => typeof val === "string";
+const isString = typeComparisonFactory<string>("string");
 
 export { isString };
-export type { IsString };
