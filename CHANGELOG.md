@@ -1,3 +1,8 @@
+# [v1.0.0-beta.5](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2021-05-31)
+
+## ✨ New Features
+- [`326a8a8`](https://github.com/TomokiMiyauci/is-valid/commit/326a8a8)   Add validator of is-type functions
+
 # [v1.0.0-beta.4](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2021-05-29)
 
 ## 🐛 Bug Fixes
