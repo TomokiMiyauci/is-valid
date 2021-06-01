@@ -1,6 +1,13 @@
 // Copyright 2021-present the is-valid authors. All rights reserved. MIT license.
-import { everyFalse, everyTrue, failOnFalse, failOnTrue } from "./is_valid.ts";
-import { assertEquals } from "../dev_deps.ts";
+import {
+  everyFalse,
+  everyTrue,
+  failOnFalse,
+  failOnTrue,
+  someFalse,
+  someTrue,
+} from "./is_valid.ts";
+import { assertEquals, isUndefined } from "../dev_deps.ts";
 import { AnyFn, not } from "../deps.ts";
 import { gtLength, ltLength } from "../validation/length.ts";
 import { isString } from "../validation/isString.ts";
@@ -74,6 +81,33 @@ Deno.test("everyTrue", () => {
   assertEqual<(a: string) => boolean>(everyTrue(isString, gtLength(4)));
 });
 
+Deno.test("someTrue", () => {
+  const table: [AnyFn<any, boolean>[], unknown, boolean][] = [
+    [[isString], "", true],
+    [[isString], undefined, false],
+    [[isString, gtLength(4)], undefined, false],
+    [[isString, (a: any) => a.size > 3], undefined, false],
+    [[isString, (a: any) => a.size > 3, isUndefined], undefined, true],
+    [[gtLength(4)], "und", false],
+    [[gtLength(4), gtLength(2)], "und", true],
+    [[gtLength(4), gtLength(2)], "un", false],
+    [[gtLength(4), ltLength(6)], "undefined", true],
+    [[gtLength(4), ltLength(6)], "abcde", true],
+    [[gtLength(4), ltLength(6)], "abcdef", true],
+  ];
+
+  table.forEach(([validations, val, expected]) => {
+    assertEquals(
+      someTrue(...validations)(val),
+      expected,
+      `someTrue(${validations})(${val}) -> ${expected}`,
+    );
+  });
+
+  assertEqual<(a: unknown) => boolean>(everyTrue(isString));
+  assertEqual<(a: string) => boolean>(everyTrue(isString, gtLength(4)));
+});
+
 Deno.test("everyFalse", () => {
   const table: [AnyFn<any, boolean>[], unknown, boolean][] = [
     [[isString], "", false],
@@ -90,6 +124,27 @@ Deno.test("everyFalse", () => {
       everyFalse(...validations)(val),
       expected,
       `everyFalse(${validations})(${val}) -> ${expected}`,
+    );
+  });
+  assertEqual<(a: unknown) => boolean>(everyFalse(isString));
+  assertEqual<(a: string) => boolean>(everyFalse(isString, gtLength(4)));
+});
+
+Deno.test("someFalse", () => {
+  const table: [AnyFn<any, boolean>[], unknown, boolean][] = [
+    [[isString], "", false],
+    [[isString], undefined, true],
+    [[gtLength(4)], undefined, false],
+    [[isString, gtLength(4)], "und", true],
+    [[isString, gtLength(4)], "undefined", false],
+    [[gtLength(4), ltLength(6)], undefined, false],
+  ];
+
+  table.forEach(([validations, val, expected]) => {
+    assertEquals(
+      someFalse(...validations)(val),
+      expected,
+      `someFalse(${validations})(${val}) -> ${expected}`,
     );
   });
   assertEqual<(a: unknown) => boolean>(everyFalse(isString));

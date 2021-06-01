@@ -1,7 +1,7 @@
 // Copyright 2021-present the is-valid authors. All rights reserved. MIT license.
 import { AnyFn, N, tryCatch } from "../deps.ts";
 /**
- * Iteration of validators that returns `true` when everything is `true`.
+ * Iteration of validators that returns `true` when everything are `true`.
  * @param validators - Any number of validators that return a `boolean`
  * @returns - A function that takes an argument of `validators[0]`
  *
@@ -27,10 +27,10 @@ const everyTrue = <T extends unknown[]>(
   ...validators: ((...val: T) => boolean)[]
 ) =>
   (...args: T): boolean =>
-    tryCatch(() => validators.every((validator) => validator(...args)), false);
+    validators.every((validator) => tryCatch(() => validator(...args), false));
 
 /**
- * Iteration of validators that returns `true` when everything is `false`.
+ * Iteration of validators that returns `true` when everything are `false`.
  * @param validators - Any number of validators that return a `boolean`
  * @returns - A function that takes an argument of `validators[0]`
  *
@@ -58,11 +58,73 @@ const everyFalse = <T extends unknown[]>(
   ...validators: ((...val: T) => boolean)[]
 ) =>
   (...args: T): boolean =>
-    tryCatch(
-      () => validators.every((validator) => N(validator(...args))),
-      false,
+    validators.every((validator) =>
+      tryCatch(() => N(validator(...args)), false)
     );
 
+/**
+ * Iteration of validators that returns `true` when some validators are `true`.
+ * @param validators - Any number of validators that return a `boolean`
+ * @returns A function that takes an argument of `validators[0]`
+ *
+ * @remarks
+ * Never throw an error. If an error occurs, the validation will skip and next.
+ *
+ * @example
+ * ```ts
+ * const isValidPassword = someTrue(gtLength(8), hasCapitalLetter, hasSpecialLetter, hasNumber)
+ * isValidPassword('fail') // false
+ * isValidPassword('greater-than-8') // true
+ * isValidPassword('Has cap') // true
+ * isValidPassword('Has!') // true
+ * ```
+ *
+ * @example
+ * ```ts
+ * const dangerValidation = someTrue((val: any) => val.size === 1, isNull)
+ * // null.size will occur TypeError but skip and next
+ * dangerValidation(null) // true
+ * ```
+ *
+ * @public
+ */
+const someFalse = <T extends unknown[]>(
+  ...validators: ((...val: T) => boolean)[]
+) =>
+  (...args: T): boolean =>
+    validators.some((validator) =>
+      tryCatch(() => N(validator(...args)), false)
+    );
+
+/**
+ * Iteration of validators that returns `true` when some validators are `false`.
+ * @param validators - Any number of validators that return a `boolean`
+ * @returns A function that takes an argument of `validators[0]`
+ *
+ * @remarks
+ * Never throw an error. If an error occurs, the validation will skip and next.
+ *
+ * @example
+ * ```ts
+ * const isValidPassword = someFalse(gtLength(8), hasCapitalLetter, hasSpecialLetter, hasNumber)
+ * isValidPassword('7letter') // true
+ * isValidPassword('hasCapital!100') // false
+ * ```
+ *
+ * @example
+ * ```ts
+ * const dangerValidation = someFalse((val: any) => val.size === 1, isNull)
+ * // null.size will occur TypeError but skip and next
+ * dangerValidation(null) // false
+ * ```
+ *
+ * @public
+ */
+const someTrue = <T extends unknown[]>(
+  ...validators: ((...val: T) => boolean)[]
+) =>
+  (...args: T): boolean =>
+    validators.some((validator) => tryCatch(() => validator(...args), false));
 const failOnFalse = <T extends AnyFn<any, boolean>, U extends unknown>(
   validations: [T, U][],
 ) =>
@@ -87,4 +149,4 @@ const failOnTrue = <T extends AnyFn<any, boolean>, U extends unknown>(
     return;
   };
 
-export { everyFalse, everyTrue, failOnFalse, failOnTrue };
+export { everyFalse, everyTrue, failOnFalse, failOnTrue, someFalse, someTrue };
