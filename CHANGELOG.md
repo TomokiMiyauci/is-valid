@@ -1,3 +1,8 @@
+# [v1.0.0-beta.8](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2021-06-01)
+
+## 🐛 Bug Fixes
+- [`8b14682`](https://github.com/TomokiMiyauci/is-valid/commit/8b14682)   Rename function names pipeTrue to everyTrue, pipeFalse to everyFalse
+
 # [v1.0.0-beta.7](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2021-06-01)
 
 ## ✨ New Features
