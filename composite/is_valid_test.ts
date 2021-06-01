@@ -1,5 +1,5 @@
 // Copyright 2021-present the is-valid authors. All rights reserved. MIT license.
-import { failOnFalse, failOnTrue, pipeFalse, pipeTrue } from "./is_valid.ts";
+import { everyFalse, everyTrue, failOnFalse, failOnTrue } from "./is_valid.ts";
 import { assertEquals } from "../dev_deps.ts";
 import { AnyFn, not } from "../deps.ts";
 import { gtLength, ltLength } from "../validation/length.ts";
@@ -48,7 +48,7 @@ Deno.test("failOnTrue", () => {
   });
 });
 
-Deno.test("pipeTrue", () => {
+Deno.test("everyTrue", () => {
   const table: [AnyFn<any, boolean>[], unknown, boolean][] = [
     [[isString], "", true],
     [[isString], undefined, false],
@@ -64,17 +64,17 @@ Deno.test("pipeTrue", () => {
 
   table.forEach(([validations, val, expected]) => {
     assertEquals(
-      pipeTrue(...validations)(val),
+      everyTrue(...validations)(val),
       expected,
-      `pipeTrue(${validations})(${val}) -> ${expected}`,
+      `everyTrue(${validations})(${val}) -> ${expected}`,
     );
   });
 
-  assertEqual<(a: unknown) => boolean>(pipeTrue(isString));
-  assertEqual<(a: string) => boolean>(pipeTrue(isString, gtLength(4)));
+  assertEqual<(a: unknown) => boolean>(everyTrue(isString));
+  assertEqual<(a: string) => boolean>(everyTrue(isString, gtLength(4)));
 });
 
-Deno.test("pipeFalse", () => {
+Deno.test("everyFalse", () => {
   const table: [AnyFn<any, boolean>[], unknown, boolean][] = [
     [[isString], "", false],
     [[isString], undefined, true],
@@ -87,11 +87,11 @@ Deno.test("pipeFalse", () => {
 
   table.forEach(([validations, val, expected]) => {
     assertEquals(
-      pipeFalse(...validations)(val),
+      everyFalse(...validations)(val),
       expected,
-      `pipeFalse(${validations})(${val}) -> ${expected}`,
+      `everyFalse(${validations})(${val}) -> ${expected}`,
     );
   });
-  assertEqual<(a: unknown) => boolean>(pipeFalse(isString));
-  assertEqual<(a: string) => boolean>(pipeFalse(isString, gtLength(4)));
+  assertEqual<(a: unknown) => boolean>(everyFalse(isString));
+  assertEqual<(a: string) => boolean>(everyFalse(isString, gtLength(4)));
 });

@@ -1,7 +1,7 @@
 // Copyright 2021-present the is-valid authors. All rights reserved. MIT license.
 import { AnyFn, N, tryCatch } from "../deps.ts";
 /**
- * Pipe of Validators that returns `true` when everything is `true`.
+ * Iteration of validators that returns `true` when everything is `true`.
  * @param validators - Any number of validators that return a `boolean`
  * @returns - A function that takes an argument of `validators[0]`
  *
@@ -10,27 +10,27 @@ import { AnyFn, N, tryCatch } from "../deps.ts";
  *
  * @example
  * ```ts
- * const isValidPassword = pipeTrue(isString, gtLength(8), ltLength(30))
+ * const isValidPassword = everyTrue(isString, gtLength(8), ltLength(30))
  * isValidPassword('this-is-valid-password') // true
  * ```
  *
  * @example
  * ```ts
- * const dangerValidation = pipeTrue((val: any) => val.size === 1)
+ * const dangerValidation = everyTrue((val: any) => val.size === 1)
  * // null.size will occur TypeError but catch and return false
  * dangerValidation(null) // false
  * ```
  *
  * @public
  */
-const pipeTrue = <T extends unknown[]>(
+const everyTrue = <T extends unknown[]>(
   ...validators: ((...val: T) => boolean)[]
 ) =>
   (...args: T): boolean =>
     tryCatch(() => validators.every((validator) => validator(...args)), false);
 
 /**
- * Pipe of Validators that returns `true` when everything is `false`.
+ * Iteration of validators that returns `true` when everything is `false`.
  * @param validators - Any number of validators that return a `boolean`
  * @returns - A function that takes an argument of `validators[0]`
  *
@@ -39,7 +39,7 @@ const pipeTrue = <T extends unknown[]>(
  *
  * @example
  * ```ts
- * const isNotNil = pipeFalse(isNull, isUndefined)
+ * const isNotNil = everyFalse(isNull, isUndefined)
  * isNotNil('this-is-not-nil') // true
  * isNotNil(null) // false
  * isNotNil(undefined) // false
@@ -47,14 +47,14 @@ const pipeTrue = <T extends unknown[]>(
  *
  * @example
  * ```ts
- * const dangerValidation = pipeFalse((val: any) => val.size === 1)
+ * const dangerValidation = everyFalse((val: any) => val.size === 1)
  * // null.size will occur TypeError but catch and return false
  * dangerValidation(null) // false
  * ```
  *
  * @public
  */
-const pipeFalse = <T extends unknown[]>(
+const everyFalse = <T extends unknown[]>(
   ...validators: ((...val: T) => boolean)[]
 ) =>
   (...args: T): boolean =>
@@ -87,4 +87,4 @@ const failOnTrue = <T extends AnyFn<any, boolean>, U extends unknown>(
     return;
   };
 
-export { failOnFalse, failOnTrue, pipeFalse, pipeTrue };
+export { everyFalse, everyTrue, failOnFalse, failOnTrue };
