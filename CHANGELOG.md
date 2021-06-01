@@ -1,3 +1,8 @@
+# [v1.0.0-beta.6](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2021-06-01)
+
+## ✨ New Features
+- [`1708fc5`](https://github.com/TomokiMiyauci/is-valid/commit/1708fc5)   Add pipeTrue and pipeFalse functions
+
 # [v1.0.0-beta.5](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2021-05-31)
 
 ## ✨ New Features
