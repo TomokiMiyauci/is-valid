@@ -1,14 +1,10 @@
 // Copyright 2021-present the is-valid authors. All rights reserved. MIT license.
-import {
-  failOnFalse,
-  failOnTrue,
-  isValidFalse,
-  isValidTrue,
-} from "./is_valid.ts";
+import { failOnFalse, failOnTrue, pipeFalse, pipeTrue } from "./is_valid.ts";
 import { assertEquals } from "../dev_deps.ts";
 import { AnyFn, not } from "../deps.ts";
 import { gtLength, ltLength } from "../validation/length.ts";
 import { isString } from "../validation/isString.ts";
+import { assertEqual } from "./_asserts.ts";
 
 Deno.test("failOnFalse", () => {
   const table: [[AnyFn<any, boolean>, unknown][], unknown, unknown][] = [
@@ -52,7 +48,7 @@ Deno.test("failOnTrue", () => {
   });
 });
 
-Deno.test("isValidTrue", () => {
+Deno.test("pipeTrue", () => {
   const table: [AnyFn<any, boolean>[], unknown, boolean][] = [
     [[isString], "", true],
     [[isString], undefined, false],
@@ -68,14 +64,17 @@ Deno.test("isValidTrue", () => {
 
   table.forEach(([validations, val, expected]) => {
     assertEquals(
-      isValidTrue(...validations)(val),
+      pipeTrue(...validations)(val),
       expected,
-      `isValidTrue(${validations})(${val}) -> ${expected}`,
+      `pipeTrue(${validations})(${val}) -> ${expected}`,
     );
   });
+
+  assertEqual<(a: unknown) => boolean>(pipeTrue(isString));
+  assertEqual<(a: string) => boolean>(pipeTrue(isString, gtLength(4)));
 });
 
-Deno.test("isValidFalse", () => {
+Deno.test("pipeFalse", () => {
   const table: [AnyFn<any, boolean>[], unknown, boolean][] = [
     [[isString], "", false],
     [[isString], undefined, true],
@@ -88,9 +87,11 @@ Deno.test("isValidFalse", () => {
 
   table.forEach(([validations, val, expected]) => {
     assertEquals(
-      isValidFalse(...validations)(val),
+      pipeFalse(...validations)(val),
       expected,
-      `isValidFalse(${validations})(${val}) -> ${expected}`,
+      `pipeFalse(${validations})(${val}) -> ${expected}`,
     );
   });
+  assertEqual<(a: unknown) => boolean>(pipeFalse(isString));
+  assertEqual<(a: string) => boolean>(pipeFalse(isString, gtLength(4)));
 });
