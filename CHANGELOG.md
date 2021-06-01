@@ -1,3 +1,8 @@
+# [v1.0.0-beta.9](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2021-06-01)
+
+## ✨ New Features
+- [`f9246c8`](https://github.com/TomokiMiyauci/is-valid/commit/f9246c8)   Add someTrue and someFalse functions
+
 # [v1.0.0-beta.8](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2021-06-01)
 
 ## 🐛 Bug Fixes
