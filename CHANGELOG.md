@@ -1,3 +1,8 @@
+# [v1.0.0-beta.7](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2021-06-01)
+
+## ✨ New Features
+- [`1615bc9`](https://github.com/TomokiMiyauci/is-valid/commit/1615bc9)   Add conversion and cast utility function
+
 # [v1.0.0-beta.6](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2021-06-01)
 
 ## ✨ New Features
