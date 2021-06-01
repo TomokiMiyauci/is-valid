@@ -1,6 +1,5 @@
 // Copyright 2021-present the is-valid authors. All rights reserved. MIT license.
 import { AnyFn, N, tryCatch } from "../deps.ts";
-
 /**
  * Pipe of Validators that returns `true` when everything is `true`.
  * @param validators - Any number of validators that return a `boolean`
@@ -64,9 +63,6 @@ const pipeFalse = <T extends unknown[]>(
       false,
     );
 
-const isValid = <T extends AnyFn<any, boolean>>(...validations: readonly T[]) =>
-  (...val: Parameters<T>) => validations.every((validation) => validation(val));
-
 const failOnFalse = <T extends AnyFn<any, boolean>, U extends unknown>(
   validations: [T, U][],
 ) =>
@@ -91,4 +87,4 @@ const failOnTrue = <T extends AnyFn<any, boolean>, U extends unknown>(
     return;
   };
 
-export { failOnFalse, failOnTrue, isValid, pipeFalse, pipeTrue };
+export { failOnFalse, failOnTrue, pipeFalse, pipeTrue };
