@@ -1,8 +1,7 @@
 // Copyright 2021-present the is-valid authors. All rights reserved. MIT license.
-import { ifElse, length, N, or } from "../deps.ts";
+import { ifElseFn, length, N, or } from "../deps.ts";
 import { isArray } from "./isArray.ts";
 import { isString } from "./isString.ts";
-
 /**
  * Whatever argument length is `0` or not.
  *
@@ -19,11 +18,10 @@ import { isString } from "./isString.ts";
  *
  * @beta
  */
-const isLength0 = (val: unknown): boolean =>
-  ifElse(
-    or(isString(val), () => isArray(val)),
-    () => N(length(val as string | unknown[])),
-    false,
-  );
+const isLength0 = ifElseFn(
+  (val) => or(isString(val), () => isArray(val)),
+  (val) => N(length(val as string | string[])),
+  false,
+);
 
 export { isLength0 };
