@@ -1,3 +1,8 @@
+# [v1.0.0-beta.10](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2021-06-07)
+
+## ✨ New Features
+- [`956f13e`](https://github.com/TomokiMiyauci/is-valid/commit/956f13e)   Add isLowerCase and isUpperCase functions
+
 # [v1.0.0-beta.9](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2021-06-01)
 
 ## ✨ New Features
