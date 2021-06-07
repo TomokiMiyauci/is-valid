@@ -15,3 +15,5 @@ export * from "./isPrimitive.ts";
 export * from "./isString.ts";
 export * from "./isSymbol.ts";
 export * from "./isUndefined.ts";
+export * from "./isLowerCase.ts";
+export * from "./isUpperCase.ts";
