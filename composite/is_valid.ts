@@ -168,7 +168,7 @@ const trueThenAll = <
   U extends AnyFn<Parameters<T>, R> | R,
   P extends [T, U],
 >(...tuple: P[]) =>
-  (...args: Parameters<P[0]>): ValueOrReturnType<P[1]> | [] => {
+  (...args: Parameters<P[0]>): ValueOrReturnType<P[1]>[] | [] => {
     const messages = [];
 
     for (const [validator, msgFn] of tuple) {
@@ -181,7 +181,7 @@ const trueThenAll = <
       }
     }
 
-    return messages as ValueOrReturnType<P[1]> | [];
+    return messages as ValueOrReturnType<P[1]>[] | [];
   };
 
 /**
@@ -222,7 +222,7 @@ const falseThenAll = <
   U extends AnyFn<Parameters<T>, R> | R,
   P extends [T, U],
 >(...tuple: P[]) =>
-  (...args: Parameters<P[0]>): ValueOrReturnType<P[1]> | [] => {
+  (...args: Parameters<P[0]>): ValueOrReturnType<P[1]>[] | [] => {
     const messages = [];
 
     for (const [validator, msgFn] of tuple) {
@@ -235,7 +235,7 @@ const falseThenAll = <
       }
     }
 
-    return messages as ValueOrReturnType<P[1]> | [];
+    return messages as ValueOrReturnType<P[1]>[] | [];
   };
 
 export {
