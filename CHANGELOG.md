@@ -1,3 +1,8 @@
+# [v1.0.0-beta.14](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.13...v1.0.0-beta.14) (2021-06-08)
+
+## ✨ New Features
+- [`7520c1b`](https://github.com/TomokiMiyauci/is-valid/commit/7520c1b)   Add utility for cast
+
 # [v1.0.0-beta.13](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2021-06-08)
 
 ## 🐛 Bug Fixes
