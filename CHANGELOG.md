@@ -1,3 +1,8 @@
+# [v1.0.0-beta.12](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2021-06-08)
+
+## ✨ New Features
+- [`0cf546e`](https://github.com/TomokiMiyauci/is-valid/commit/0cf546e)   Add trueThenAll and falseThenAll functions
+
 # [v1.0.0-beta.11](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2021-06-08)
 
 ## ✨ New Features
