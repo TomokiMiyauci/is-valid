@@ -1,3 +1,8 @@
+# [v1.0.0-beta.11](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2021-06-08)
+
+## ✨ New Features
+- [`71c8073`](https://github.com/TomokiMiyauci/is-valid/commit/71c8073)   Add trueThen and falseThen functions
+
 # [v1.0.0-beta.10](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2021-06-07)
 
 ## ✨ New Features
