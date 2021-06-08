@@ -1,5 +1,7 @@
 // Copyright 2021-present the is-valid authors. All rights reserved. MIT license.
 import { AnyFn, N, tryCatch } from "../deps.ts";
+import { isFunction } from "../validation/isFunction.ts";
+import { ValueOrReturnType } from "../_shared/types.ts";
 /**
  * Iteration of validators that returns `true` when everything are `true`.
  * @param validators - Any number of validators that return a `boolean`
@@ -149,4 +151,62 @@ const failOnTrue = <T extends AnyFn<any, boolean>, U extends unknown>(
     return;
   };
 
-export { everyFalse, everyTrue, failOnFalse, failOnTrue, someFalse, someTrue };
+/**
+ * Receives a validator and message pair and returns a message when validation is `true`.
+ * @param tuple - Tuple of [Validator, ReturnValue]
+ * @returns Return `tuple[1]` when `tuple[0]` is `true`; otherwise undefined.
+ *
+ * @beta
+ */
+const trueThen = <
+  R,
+  T extends AnyFn,
+  U extends AnyFn<Parameters<T>, R> | R,
+  P extends [T, U],
+>(...tuple: P[]) =>
+  (...args: Parameters<P[0]>): ValueOrReturnType<P[1]> | undefined => {
+    for (const [validator, msgFn] of tuple) {
+      if (validator(...args)) {
+        if (isFunction(msgFn)) {
+          return msgFn(...args) as any;
+        }
+        return msgFn as any;
+      }
+    }
+    return undefined;
+  };
+
+/**
+ * Receives a validator and message pair and returns a message when validation is `false`.
+ * @param tuple - Tuple of [Validator, ReturnValue]
+ * @returns Return `tuple[1]` when `tuple[0]` is `false`; otherwise undefined.
+ *
+ * @beta
+ */
+const falseThen = <
+  R,
+  T extends AnyFn,
+  U extends AnyFn<Parameters<T>, R> | R,
+  P extends [T, U],
+>(...tuple: P[]) =>
+  (...args: Parameters<P[0]>): ValueOrReturnType<P[1]> | undefined => {
+    for (const [validator, msgFn] of tuple) {
+      if (!validator(...args)) {
+        if (isFunction(msgFn)) {
+          return msgFn(...args) as any;
+        }
+        return msgFn as any;
+      }
+    }
+    return undefined;
+  };
+export {
+  everyFalse,
+  everyTrue,
+  failOnFalse,
+  failOnTrue,
+  falseThen,
+  someFalse,
+  someTrue,
+  trueThen,
+};
