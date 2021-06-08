@@ -1,7 +1,9 @@
 // Copyright 2021-present the is-valid authors. All rights reserved. MIT license.
 import { AnyFn, N, tryCatch } from "../deps.ts";
 import { isFunction } from "../validation/isFunction.ts";
-import { ValueOrReturnType } from "../_shared/types.ts";
+
+type ValueOrReturnType<T> = T extends AnyFn ? ReturnType<T> : T;
+
 /**
  * Iteration of validators that returns `true` when everything are `true`.
  * @param validators - Any number of validators that return a `boolean`
