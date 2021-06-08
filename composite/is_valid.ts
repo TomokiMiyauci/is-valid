@@ -129,29 +129,6 @@ const someTrue = <T extends unknown[]>(
 ) =>
   (...args: T): boolean =>
     validators.some((validator) => tryCatch(() => validator(...args), false));
-const failOnFalse = <T extends AnyFn<any, boolean>, U extends unknown>(
-  validations: [T, U][],
-) =>
-  (...val: Parameters<T>) => {
-    for (const [validate, msg] of validations) {
-      if (N(validate(...val))) {
-        return msg;
-      }
-    }
-    return;
-  };
-
-const failOnTrue = <T extends AnyFn<any, boolean>, U extends unknown>(
-  validations: [T, U][],
-) =>
-  (...val: Parameters<T>) => {
-    for (const [validate, msg] of validations) {
-      if (validate(...val)) {
-        return msg;
-      }
-    }
-    return;
-  };
 
 /**
  * Receives a validator and message pair and returns a message when validation is `true`.
@@ -179,6 +156,35 @@ const trueThen = <
   };
 
 /**
+ * Receives a validator and message pair and returns all message `array` when validation is `true`.
+ * @param tuple - Tuple of [Validator, ReturnValue]
+ * @returns Return array of `tuple[1]` when `tuple[0]` is `true`; otherwise empty `array`.
+ *
+ * @beta
+ */
+const trueThenAll = <
+  R,
+  T extends AnyFn,
+  U extends AnyFn<Parameters<T>, R> | R,
+  P extends [T, U],
+>(...tuple: P[]) =>
+  (...args: Parameters<P[0]>): ValueOrReturnType<P[1]> | [] => {
+    const messages = [];
+
+    for (const [validator, msgFn] of tuple) {
+      if (validator(...args)) {
+        if (isFunction(msgFn)) {
+          messages.push(msgFn(...args));
+        } else {
+          messages.push(msgFn);
+        }
+      }
+    }
+
+    return messages as ValueOrReturnType<P[1]> | [];
+  };
+
+/**
  * Receives a validator and message pair and returns a message when validation is `false`.
  * @param tuple - Tuple of [Validator, ReturnValue]
  * @returns Return `tuple[1]` when `tuple[0]` is `false`; otherwise undefined.
@@ -202,13 +208,43 @@ const falseThen = <
     }
     return undefined;
   };
+
+/**
+ * Receives a validator and message pair and returns all message `array` when validation is `false`.
+ * @param tuple - Tuple of [Validator, ReturnValue]
+ * @returns Return array of `tuple[1]` when `tuple[0]` is `false`; otherwise empty `array`.
+ *
+ * @beta
+ */
+const falseThenAll = <
+  R,
+  T extends AnyFn,
+  U extends AnyFn<Parameters<T>, R> | R,
+  P extends [T, U],
+>(...tuple: P[]) =>
+  (...args: Parameters<P[0]>): ValueOrReturnType<P[1]> | [] => {
+    const messages = [];
+
+    for (const [validator, msgFn] of tuple) {
+      if (!validator(...args)) {
+        if (isFunction(msgFn)) {
+          messages.push(msgFn(...args));
+        } else {
+          messages.push(msgFn);
+        }
+      }
+    }
+
+    return messages as ValueOrReturnType<P[1]> | [];
+  };
+
 export {
   everyFalse,
   everyTrue,
-  failOnFalse,
-  failOnTrue,
   falseThen,
+  falseThenAll,
   someFalse,
   someTrue,
   trueThen,
+  trueThenAll,
 };

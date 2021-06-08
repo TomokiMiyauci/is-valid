@@ -2,10 +2,10 @@
 import {
   everyFalse,
   everyTrue,
-  failOnFalse,
-  failOnTrue,
+  falseThen,
   someFalse,
   someTrue,
+  trueThen,
 } from "./is_valid.ts";
 import { assertEquals, isUndefined } from "../dev_deps.ts";
 import { AnyFn, not } from "../deps.ts";
@@ -13,7 +13,7 @@ import { gtLength, ltLength } from "../validation/length.ts";
 import { isString } from "../validation/isString.ts";
 import { assertEqual } from "./_asserts.ts";
 
-Deno.test("failOnFalse", () => {
+Deno.test("falseThen", () => {
   const table: [[AnyFn<any, boolean>, unknown][], unknown, unknown][] = [
     [[[(a: string) => a === "hello", "error"]], "", "error"],
     [[[(a: string) => a === "hello", "error"]], "hello", undefined],
@@ -27,14 +27,14 @@ Deno.test("failOnFalse", () => {
   ];
   table.forEach(([validations, val, expected]) => {
     assertEquals(
-      failOnFalse(validations)(val),
+      falseThen(...validations)(val),
       expected,
-      `failOnFalse(${validations})(${val}) -> ${expected}`,
+      `falseThen(${validations})(${val}) -> ${expected}`,
     );
   });
 });
 
-Deno.test("failOnTrue", () => {
+Deno.test("trueThen", () => {
   const table: [[AnyFn<any, boolean>, unknown][], unknown, unknown][] = [
     [[[(a: string) => a === "hello", "error"]], "", undefined],
     [[[(a: string) => a === "hello", "error"]], "hello", "error"],
@@ -48,9 +48,9 @@ Deno.test("failOnTrue", () => {
   ];
   table.forEach(([validations, val, expected]) => {
     assertEquals(
-      failOnTrue(validations)(val),
+      trueThen(...validations)(val),
       expected,
-      `failOnTrue(${validations})(${val}) -> ${expected}`,
+      `trueThen(${validations})(${val}) -> ${expected}`,
     );
   });
 });
