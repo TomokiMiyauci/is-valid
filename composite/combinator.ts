@@ -19,13 +19,13 @@
  * ```
  */
 const cv = <
-  A extends unknown,
+  A extends unknown[],
   T extends (...args: any[]) => A,
   R,
 >(
   conversion: T,
-  fn: (a: ReturnType<T>) => R,
-) => (...b: Parameters<T>): R => fn(conversion(...b) as ReturnType<T>);
+  fn: (...args: ReturnType<T>) => R,
+) => (...args: Parameters<T>): R => fn(...conversion(...args) as ReturnType<T>);
 
 /**
  * A function that casts the return value of a function.
@@ -39,4 +39,50 @@ const cv = <
  */
 const cast = <R, T extends unknown = unknown>() => (val: T): R => val as R;
 
-export { cast, cv };
+/**
+ * Cast function for `string`
+ *
+ * @beta
+ */
+const castString = cast<string>();
+/**
+ * Cast function for `number`
+ *
+ * @beta
+ */
+const castNumber = cast<number>();
+/**
+ * Cast function for `undefined`
+ *
+ * @beta
+ */
+const castUndefined = cast<undefined>();
+/**
+ * Cast function for `null`
+ *
+ * @beta
+ */
+const castNull = cast<null>();
+/**
+ * Cast function for `undefined` or `null`
+ *
+ * @beta
+ */
+const castNil = cast<null | undefined>();
+/**
+ * Cast function for `symbol`
+ *
+ * @beta
+ */
+const castBigInt = cast<bigint>();
+
+export {
+  cast,
+  castBigInt,
+  castNil,
+  castNull,
+  castNumber,
+  castString,
+  castUndefined,
+  cv,
+};
