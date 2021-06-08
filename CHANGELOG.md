@@ -1,3 +1,8 @@
+# [v1.0.0-beta.15](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2021-06-08)
+
+## ✨ New Features
+- [`15c0fb8`](https://github.com/TomokiMiyauci/is-valid/commit/15c0fb8)   Add validator for isTrimmable and such function
+
 # [v1.0.0-beta.14](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.13...v1.0.0-beta.14) (2021-06-08)
 
 ## ✨ New Features
