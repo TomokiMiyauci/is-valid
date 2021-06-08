@@ -17,3 +17,4 @@ export * from "./isSymbol.ts";
 export * from "./isUndefined.ts";
 export * from "./isLowerCase.ts";
 export * from "./isUpperCase.ts";
+export * from "./isTrimmable.ts";

@@ -14,6 +14,9 @@ export {
   not,
   or,
   pipe,
+  trim,
+  trimLeft,
+  trimRight,
   tryCatch,
 } from "https://deno.land/x/fonction@v1.8.1/mod.ts";
 
