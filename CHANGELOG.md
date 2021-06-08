@@ -1,3 +1,8 @@
+# [v1.0.0-beta.13](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2021-06-08)
+
+## 🐛 Bug Fixes
+- [`8061745`](https://github.com/TomokiMiyauci/is-valid/commit/8061745)   Fix return value types
+
 # [v1.0.0-beta.12](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2021-06-08)
 
 ## ✨ New Features
