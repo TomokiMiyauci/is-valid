@@ -3,6 +3,7 @@ import { resolve } from "path";
 import { terser } from "rollup-plugin-terser";
 import replace from "@rollup/plugin-replace";
 import { main, module } from "./package.json";
+import { dependencies } from "./package.json";
 const baseDir = resolve(__dirname);
 const inputFilePath = resolve(baseDir, "mod.ts");
 const banner =
@@ -10,9 +11,13 @@ const banner =
 
 const replaceOption = {
   ".ts": "",
-  "https://deno.land/x/fonction@v1.8.1/mod": "fonction",
+  "https://deno.land/x/fonction@v2.1.0-beta.3/mod": "fonction",
+  "https://deno.land/x/core_fn@v1.0.0-beta.16/mod": "core-fn",
+
   preventAssignment: true,
 };
+
+const external = Object.keys(dependencies);
 
 const config = [
   {
@@ -29,7 +34,7 @@ const config = [
       terser(),
     ],
 
-    external: ["fonction"],
+    external,
 
     output: {
       file: main,
@@ -40,7 +45,7 @@ const config = [
   },
   {
     input: inputFilePath,
-    external: ["fonction"],
+    external,
 
     plugins: [
       replace(replaceOption),

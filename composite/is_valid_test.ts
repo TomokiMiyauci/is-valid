@@ -7,7 +7,8 @@ import {
   someTrue,
   trueThen,
 } from "./is_valid.ts";
-import { assertEquals, isUndefined } from "../dev_deps.ts";
+import { assertEquals } from "../dev_deps.ts";
+import { isUndefined } from "../validation/isUndefined.ts";
 import { AnyFn, not } from "../deps.ts";
 import { gtLength, ltLength } from "../validation/length.ts";
 import { isString } from "../validation/isString.ts";

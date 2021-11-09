@@ -6,22 +6,24 @@ export {
   gte,
   ifElse,
   ifElseFn,
-  keys,
-  length,
   lt,
   lte,
   N,
   not,
   or,
   pipe,
-  trim,
-  trimLeft,
-  trimRight,
   tryCatch,
-} from "https://deno.land/x/fonction@v1.8.1/mod.ts";
+} from "https://deno.land/x/fonction@v2.1.0-beta.3/mod.ts";
 
 export type {
   AnyFn,
   Empty,
   Primitive,
-} from "https://deno.land/x/fonction@v1.8.1/mod.ts";
+} from "https://deno.land/x/fonction@v2.1.0-beta.3/mod.ts";
+
+export {
+  length,
+  trim,
+  trimLeft,
+  trimRight,
+} from "https://deno.land/x/core_fn@v1.0.0-beta.16/mod.ts";

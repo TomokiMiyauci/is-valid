@@ -1,5 +1,5 @@
 // Copyright 2021-present the is-valid authors. All rights reserved. MIT license.
-import { and, Empty, keys, or } from "../deps.ts";
+import { and, Empty, or } from "../deps.ts";
 import { isArray } from "./isArray.ts";
 import { isLength0 } from "./isLength0.ts";
 import { isObject } from "./isObject.ts";
@@ -32,7 +32,7 @@ import { isString } from "./isString.ts";
 const isEmpty = (val: unknown): val is Empty => {
   if (or(isString(val), () => isArray(val))) return isLength0(val);
   else if (isObject(val)) {
-    return and(isLength0(keys(val)), () => val.constructor === Object);
+    return and(isLength0(Object.keys(val)), () => val.constructor === Object);
   } else return false;
 };
 
