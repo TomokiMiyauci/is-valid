@@ -1,3 +1,8 @@
+# [v1.0.0-beta.16](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2021-11-09)
+
+## ✨ New Features
+- [`6b80d54`](https://github.com/TomokiMiyauci/is-valid/commit/6b80d54)   Upgrade deps and change internal functions
+
 # [v1.0.0-beta.15](https://github.com/TomokiMiyauci/is-valid/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2021-06-08)
 
 ## ✨ New Features
